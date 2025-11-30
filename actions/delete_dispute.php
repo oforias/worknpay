@@ -1,7 +1,7 @@
 <?php
 /**
  * Delete/Cancel Dispute Action
- * Allows customers or admins to cancel open disputes
+ * Admin only - allows deletion of disputes
  */
 
 header('Content-Type: application/json');
@@ -12,6 +12,12 @@ require_once '../controllers/dispute_controller.php';
 // Check authentication
 require_login();
 
+// Admin only
+if (!is_admin()) {
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized. Admin access required.']);
+    exit();
+}
+
 $input = json_decode(file_get_contents('php://input'), true);
 $dispute_id = isset($input['dispute_id']) ? (int)$input['dispute_id'] : 0;
 
@@ -21,19 +27,17 @@ if ($dispute_id <= 0) {
 }
 
 try {
-    $user_id = get_user_id();
+    $result = delete_dispute_ctr($dispute_id);
     
-    $result = delete_dispute_ctr($dispute_id, $user_id);
-    
-    if ($result['success']) {
+    if ($result) {
         echo json_encode([
             'status' => 'success',
-            'message' => $result['message']
+            'message' => 'Dispute deleted successfully'
         ]);
     } else {
         echo json_encode([
             'status' => 'error',
-            'message' => $result['message']
+            'message' => 'Failed to delete dispute or dispute is already resolved'
         ]);
     }
     

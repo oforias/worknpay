@@ -178,20 +178,6 @@ class Dispute extends db_connection
     }
     
     /**
-     * Delete/dismiss a dispute (admin only)
-     */
-    public function delete_dispute($dispute_id)
-    {
-        $dispute_id = (int)$dispute_id;
-        
-        $sql = "DELETE FROM disputes WHERE dispute_id = $dispute_id";
-        
-        return $this->db_query($sql);
-    }
-}
-?>
-
-    /**
      * Delete/Cancel a dispute (only if not resolved)
      */
     public function delete_dispute($dispute_id)
@@ -213,3 +199,4 @@ class Dispute extends db_connection
         return $this->db_query($sql);
     }
 }
+?>

@@ -81,7 +81,7 @@ function get_worker_disputes_ctr($worker_id)
 }
 
 /**
- * Delete/dismiss a dispute (admin only)
+ * Delete/Cancel a dispute (admin only)
  */
 function delete_dispute_ctr($dispute_id)
 {
@@ -89,29 +89,3 @@ function delete_dispute_ctr($dispute_id)
     return $dispute->delete_dispute($dispute_id);
 }
 ?>
-
-
-/**
- * Delete/Cancel a dispute
- */
-function delete_dispute_ctr($dispute_id, $user_id)
-{
-    $dispute = new Dispute();
-    
-    // Get dispute details to verify ownership
-    $dispute_details = $dispute->get_dispute_by_id($dispute_id);
-    if (!$dispute_details) {
-        return ['success' => false, 'message' => 'Dispute not found'];
-    }
-    
-    // Only customer who opened the dispute or admin can delete it
-    if ($dispute_details['customer_id'] != $user_id && !is_admin()) {
-        return ['success' => false, 'message' => 'Unauthorized'];
-    }
-    
-    if ($dispute->delete_dispute($dispute_id)) {
-        return ['success' => true, 'message' => 'Dispute cancelled successfully'];
-    }
-    
-    return ['success' => false, 'message' => 'Failed to cancel dispute or dispute is already resolved'];
-}

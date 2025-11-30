@@ -48,7 +48,12 @@ try {
     ];
     
     // Custom callback for bookings
-    $callback_url = APP_BASE_URL . '/view/booking_callback.php';
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    if (strpos($host, 'infinityfreeapp.com') !== false) {
+        $callback_url = 'https://worknpay.infinityfreeapp.com/view/booking_callback.php';
+    } else {
+        $callback_url = APP_BASE_URL . '/view/booking_callback.php';
+    }
     
     // Initialize transaction with custom callback
     $data = [

@@ -98,15 +98,14 @@ error_log("Reference from URL: $reference");
             const reference = '<?php echo htmlspecialchars($reference); ?>';
             
             try {
-                const response = await fetch('../actions/test_verify_payment.php', {
+                // Use booking payment processor
+                const response = await fetch('../actions/process_booking_payment.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        reference: reference,
-                        cart_items: null, // Will be fetched from backend
-                        total_amount: null // Will be calculated from cart
+                        reference: reference
                     })
                 });
                 
@@ -116,15 +115,14 @@ error_log("Reference from URL: $reference");
                 // Hide spinner
                 document.getElementById('spinner').style.display = 'none';
                 
-                if (data.status === 'success' && data.verified) {
+                if (data.status === 'success') {
                     // Payment verified successfully
                     document.getElementById('successBox').style.display = 'block';
                     
-                    // Redirect to success page immediately
+                    // Redirect to bookings page
                     setTimeout(() => {
-                        // Redirect to orders or success page
-                        window.location.replace(`payment_success.php?reference=${encodeURIComponent(reference)}&invoice=${encodeURIComponent(data.invoice_no)}`);
-                    }, 500);
+                        window.location.replace('my_bookings.php');
+                    }, 1000);
                     
                 } else {
                     // Payment verification failed
@@ -133,7 +131,7 @@ error_log("Reference from URL: $reference");
                     
                     // Redirect after 5 seconds
                     setTimeout(() => {
-                        window.location.href = '../test_paystack.php';
+                        window.location.href = 'home.php';
                     }, 5000);
                 }
                 
@@ -143,7 +141,7 @@ error_log("Reference from URL: $reference");
                 
                 // Redirect after 5 seconds
                 setTimeout(() => {
-                    window.location.href = '../test_paystack.php';
+                    window.location.href = 'home.php';
                 }, 5000);
             }
         }
