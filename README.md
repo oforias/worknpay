@@ -51,7 +51,7 @@ A mobile-first e-commerce platform connecting customers with verified skilled an
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/worknpay.git
+   git clone https://github.com/oforias/worknpay.git
    cd worknpay
    ```
 
@@ -103,23 +103,16 @@ A mobile-first e-commerce platform connecting customers with verified skilled an
 
 ## 🌐 Deployment
 
-### Free Hosting Options
-
-See [FREE_HOSTING_GUIDE.md](FREE_HOSTING_GUIDE.md) for detailed instructions on deploying to:
-- InfinityFree (Recommended)
-- 000webhost
-- Awardspace
-- FreeHosting.com
-
 ### Quick Deployment Steps
 
-1. Sign up for free hosting
+1. Sign up for a hosting provider (InfinityFree, 000webhost, Awardspace, etc.)
 2. Create MySQL database
 3. Upload files via FTP/File Manager
-4. Import database via phpMyAdmin
-5. Update configuration files
-6. Enable SSL certificate
-7. Test and go live!
+4. Import database via phpMyAdmin (`db/dbforlab.sql`)
+5. Update configuration files (`settings/db_cred.php` and `settings/paystack_config.php`)
+6. Set proper file permissions for `uploads/` folder
+7. Enable SSL certificate
+8. Test and go live!
 
 ## 📱 Service Categories
 
@@ -149,9 +142,7 @@ See [FREE_HOSTING_GUIDE.md](FREE_HOSTING_GUIDE.md) for detailed instructions on 
 
 ## 📖 Documentation
 
-- [Deployment Guide](DEPLOYMENT_READY.md) - Complete deployment instructions
-- [Free Hosting Guide](FREE_HOSTING_GUIDE.md) - Free hosting setup
-- [Test Accounts](TEST_ACCOUNTS.md) - Test credentials
+See the README above for installation and deployment instructions.
 
 ## 🧪 Testing
 
@@ -175,13 +166,9 @@ See [FREE_HOSTING_GUIDE.md](FREE_HOSTING_GUIDE.md) for detailed instructions on 
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 👥 Authors
 
-- Your Name - Initial work
+- Alan Kofi Safo Ofori - Initial work
 
 ## 🙏 Acknowledgments
 
@@ -213,5 +200,3 @@ All core features implemented and tested. Ready for deployment.
 ---
 
 Made with ❤️ in Ghana
-
-By Alan Kofi Safo Ofori
