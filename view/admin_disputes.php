@@ -314,7 +314,10 @@ $resolved_disputes = array_filter($disputes, fn($d) => $d['dispute_status'] === 
                                 <textarea id="notes-<?php echo $dispute['dispute_id']; ?>" required placeholder="Explain your decision..."></textarea>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Resolve Dispute</button>
+                            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                                <button type="button" class="btn btn-danger" onclick="dismissDispute(<?php echo $dispute['dispute_id']; ?>)">Dismiss Dispute</button>
+                                <button type="submit" class="btn btn-primary">Resolve Dispute</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -388,12 +391,50 @@ $resolved_disputes = array_filter($disputes, fn($d) => $d['dispute_status'] === 
             }
         }
         
+        async function dismissDispute(disputeId) {
+            if (!confirm('Are you sure you want to dismiss this dispute? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('../actions/delete_dispute.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dispute_id: disputeId })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    alert(result.message);
+                    window.location.reload();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to dismiss dispute. Please try again.');
+            }
+        }
+        
         async function resolveDispute(event, disputeId, paymentAmount) {
             event.preventDefault();
             
             const outcome = document.getElementById(`outcome-${disputeId}`).value;
             const notes = document.getElementById(`notes-${disputeId}`).value;
-            const refundAmount = document.getElementById(`refund-${disputeId}`)?.value;
+            const refundInput = document.getElementById(`refund-${disputeId}`);
+            
+            // Validate partial refund amount
+            if (outcome === 'partial_refund') {
+                if (!refundInput || !refundInput.value || parseFloat(refundInput.value) <= 0) {
+                    alert('Please enter a valid refund amount for partial refund');
+                    return;
+                }
+                if (parseFloat(refundInput.value) > paymentAmount) {
+                    alert(`Refund amount cannot exceed payment amount (GH₵${paymentAmount})`);
+                    return;
+                }
+            }
             
             if (!confirm(`Are you sure you want to resolve this dispute with outcome: ${outcome.replace('_', ' ')}?`)) {
                 return;
@@ -405,8 +446,8 @@ $resolved_disputes = array_filter($disputes, fn($d) => $d['dispute_status'] === 
                 resolution_notes: notes
             };
             
-            if (outcome === 'partial_refund' && refundAmount) {
-                data.refund_amount = parseFloat(refundAmount);
+            if (outcome === 'partial_refund') {
+                data.refund_amount = parseFloat(refundInput.value);
             }
             
             try {

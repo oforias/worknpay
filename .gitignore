@@ -1,6 +1,8 @@
 # Sensitive files
 settings/db_cred.php
 settings/paystack_config.php
+settings/db_cred.local.php
+settings/db_cred.hosting.php
 
 # Test files
 test_*.php
@@ -9,12 +11,45 @@ create_test_*.php
 debug_*.php
 setup_test_*.php
 show_test_*.php
-verify_setup.php
+verify_*.php
 release_escrow_manual.php
+reset_admin_password.php
+generate_adf_documents.php
+setup_worker_data.php
 
-# Uploads
+# Test files in subdirectories
+actions/test_*.php
+view/debug_*.php
+
+# Documentation files (exclude all except README)
+*.md
+!README.md
+
+# ADF Submission folder
+ADF_SUBMISSION/
+
+# Database test data and migrations (keep only main schema)
+db/test_*.sql
+db/migrations/
+db/apply_*.php
+db/ensure_*.php
+db/run_*.php
+db/MIGRATION_STATUS.md
+db/modifications.sql
+
+# Uploads (keep folder structure, exclude content)
 uploads/*
 !uploads/.gitkeep
+!uploads/completion_photos/
+!uploads/profile_photos/
+uploads/completion_photos/*
+uploads/profile_photos/*
+!uploads/completion_photos/.gitkeep
+!uploads/profile_photos/.gitkeep
+uploads/completions/
+
+# Test results
+test_results.html
 
 # IDE files
 .vscode/
@@ -37,11 +72,5 @@ error_log
 *.bak
 *.cache
 
-# Spec files (optional - remove if you want to include them)
+# Spec files
 .kiro/
-
-# Documentation (keep these)
-!README.md
-!LICENSE
-!DEPLOYMENT_READY.md
-!FREE_HOSTING_GUIDE.md

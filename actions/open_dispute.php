@@ -50,6 +50,20 @@ try {
         throw new Exception('Only completed bookings can be disputed');
     }
     
+    // Check if payment record exists
+    require_once '../classes/payment_class.php';
+    $payment_class = new payment_class();
+    $payment = $payment_class->get_payment_by_booking($booking_id);
+    
+    if (!$payment) {
+        throw new Exception('No payment record found for this booking. Only paid bookings can be disputed.');
+    }
+    
+    // Check if payment is in a valid state for disputes
+    if ($payment['payment_status'] === 'refunded') {
+        throw new Exception('This booking has already been refunded and cannot be disputed.');
+    }
+    
     // Check eligibility (48-hour window, no existing dispute)
     $eligibility = validate_dispute_eligibility_ctr($booking_id);
     if (!$eligibility['eligible']) {

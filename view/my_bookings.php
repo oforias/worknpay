@@ -50,12 +50,13 @@ if ($all_bookings) {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 50%, #1a1f36 100%);
+            background: #0A0E1A;
             min-height: 100vh;
             padding-bottom: 80px;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            color: white;
         }
         
         body::before {
@@ -66,7 +67,7 @@ if ($all_bookings) {
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(255, 165, 0, 0.08) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
@@ -79,11 +80,11 @@ if ($all_bookings) {
         }
         
         .header {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(20, 24, 36, 0.95) 100%);
             backdrop-filter: blur(20px);
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
             position: relative;
             z-index: 10;
         }
@@ -91,18 +92,18 @@ if ($all_bookings) {
         .header-title {
             font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .tabs {
             display: flex;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             padding: 0 20px;
             gap: 32px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
             position: relative;
             z-index: 10;
         }
@@ -111,7 +112,7 @@ if ($all_bookings) {
             padding: 18px 0;
             font-size: 15px;
             font-weight: 600;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6);
             border-bottom: 3px solid transparent;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -119,7 +120,7 @@ if ($all_bookings) {
         }
         
         .tab:hover {
-            color: #1a1f36;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .tab.active {
@@ -137,12 +138,12 @@ if ($all_bookings) {
         }
         
         .booking-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             padding: 20px;
             border-radius: 20px;
             margin-bottom: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 215, 0, 0.1);
             transition: all 0.4s ease;
             position: relative;
@@ -162,7 +163,7 @@ if ($all_bookings) {
         
         .booking-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
             border-color: rgba(255, 215, 0, 0.3);
         }
         
@@ -180,7 +181,7 @@ if ($all_bookings) {
         .worker-info h3 {
             font-size: 18px;
             font-weight: 700;
-            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
@@ -188,7 +189,7 @@ if ($all_bookings) {
         
         .worker-info p {
             font-size: 14px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
         }
         
@@ -237,7 +238,7 @@ if ($all_bookings) {
             gap: 20px;
             margin-bottom: 12px;
             font-size: 14px;
-            color: #757575;
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .booking-footer {
@@ -245,7 +246,7 @@ if ($all_bookings) {
             justify-content: space-between;
             align-items: center;
             padding-top: 12px;
-            border-top: 1px solid #F0F0F0;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
         }
         
         .booking-amount {
@@ -260,13 +261,13 @@ if ($all_bookings) {
             padding: 10px 20px;
             border-radius: 12px;
             border: 2px solid transparent;
-            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
-            color: white;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #0A0E1A;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(26, 31, 54, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -278,13 +279,13 @@ if ($all_bookings) {
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
         
         .btn-small:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(26, 31, 54, 0.4);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.5);
         }
         
         .btn-small:hover::before {
@@ -294,24 +295,22 @@ if ($all_bookings) {
         .empty-state {
             text-align: center;
             padding: 80px 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.1);
         }
         
         .empty-icon {
             font-size: 80px;
             margin-bottom: 20px;
-            opacity: 0.8;
+            opacity: 0.6;
         }
         
         .empty-text {
             font-size: 18px;
             font-weight: 600;
-            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .bottom-nav {

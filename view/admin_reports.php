@@ -10,8 +10,16 @@ if (!is_admin()) {
 
 $db = new db_connection();
 
-// Get statistics
-$total_revenue = $db->db_fetch_one("SELECT SUM(estimated_price) as total FROM bookings WHERE booking_status = 'completed'")['total'] ?? 0;
+// Get statistics - Platform revenue (12% commission + instant payout fees)
+$revenue_result = $db->db_fetch_one("SELECT 
+                    SUM(customer_commission + worker_commission) as commission_revenue,
+                    SUM(CASE WHEN payout_type = 'instant' THEN payout_amount * 0.02 ELSE 0 END) as payout_fees
+                  FROM payments p
+                  LEFT JOIN payouts py ON p.booking_id = py.booking_id
+                  WHERE p.payment_status = 'completed'");
+$commission_revenue = ($revenue_result && $revenue_result['commission_revenue']) ? $revenue_result['commission_revenue'] : 0;
+$payout_fees = ($revenue_result && $revenue_result['payout_fees']) ? $revenue_result['payout_fees'] : 0;
+$total_revenue = $commission_revenue + $payout_fees;
 $total_bookings = $db->db_fetch_one("SELECT COUNT(*) as count FROM bookings")['count'];
 $total_users = $db->db_fetch_one("SELECT COUNT(*) as count FROM users")['count'];
 $total_workers = $db->db_fetch_one("SELECT COUNT(*) as count FROM users WHERE user_role = 2")['count'];

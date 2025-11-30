@@ -44,10 +44,24 @@ $completed_bookings_query = "SELECT COUNT(*) as total FROM bookings WHERE bookin
 $result = $db->db_fetch_one($completed_bookings_query);
 $stats['completed_bookings'] = $result ? $result['total'] : 0;
 
-// Total revenue
-$revenue_query = "SELECT SUM(estimated_price) as total FROM bookings WHERE booking_status = 'completed'";
+// Total platform revenue (12% commission from bookings + instant payout fees)
+// Calculate from payments table: customer_commission (7%) + worker_commission (5%)
+$revenue_query = "SELECT 
+                    COALESCE(SUM(customer_commission + worker_commission), 0) as commission_revenue
+                  FROM payments
+                  WHERE payment_status = 'successful'";
 $result = $db->db_fetch_one($revenue_query);
-$stats['total_revenue'] = ($result && $result['total']) ? $result['total'] : 0;
+$commission_revenue = ($result && $result['commission_revenue']) ? floatval($result['commission_revenue']) : 0;
+
+// Calculate instant payout fees (2% of instant payouts)
+$payout_fees_query = "SELECT 
+                        COALESCE(SUM(payout_fee), 0) as payout_fees
+                      FROM payouts
+                      WHERE payout_type = 'instant' AND payout_status IN ('completed', 'pending')";
+$result = $db->db_fetch_one($payout_fees_query);
+$payout_fees = ($result && $result['payout_fees']) ? floatval($result['payout_fees']) : 0;
+
+$stats['total_revenue'] = $commission_revenue + $payout_fees;
 
 // Pending payouts
 $payouts_query = "SELECT COUNT(*) as total FROM payouts WHERE payout_status = 'pending'";
@@ -492,6 +506,12 @@ if (!$recent_bookings) {
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="admin_financials.php" class="nav-link">
+                        <span class="nav-icon">💵</span>
+                        <span>Financials</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="admin_reports.php" class="nav-link">
                         <span class="nav-icon">📈</span>
                         <span>Reports</span>
@@ -514,10 +534,6 @@ if (!$recent_bookings) {
                     <p style="color: var(--text-secondary); margin-top: 4px;">Welcome back, <?php echo htmlspecialchars($admin_name); ?>!</p>
                 </div>
                 <div class="header-actions">
-                    <button class="theme-toggle" onclick="toggleTheme()">
-                        <span id="themeIcon">🌙</span>
-                        <span id="themeText">Dark Mode</span>
-                    </button>
                     <button class="logout-btn" onclick="logout()">
                         <span>🚪</span>
                         <span>Logout</span>
@@ -560,8 +576,11 @@ if (!$recent_bookings) {
                 <div class="stat-card">
                     <div class="stat-header">
                         <div>
-                            <div class="stat-value">GH₵<?php echo number_format($stats['total_revenue'], 0); ?></div>
-                            <div class="stat-label">Total Revenue</div>
+                            <div class="stat-value">GH₵<?php echo number_format($stats['total_revenue'], 2); ?></div>
+                            <div class="stat-label">Platform Revenue</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+                                12% Commission + Instant Payout Fees (2%)
+                            </div>
                         </div>
                         <div class="stat-icon revenue">💰</div>
                     </div>
@@ -634,7 +653,6 @@ if (!$recent_bookings) {
         </main>
     </div>
     
-    <script src="../js/theme-toggle.js"></script>
     <script>
         function logout() {
             if (confirm('Are you sure you want to logout?')) {

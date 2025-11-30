@@ -143,7 +143,7 @@ class Dispute extends db_connection
         $dispute_id = (int)$dispute_id;
         $resolution = $this->db_escape($resolution);
         $outcome = $this->db_escape($outcome);
-        $refund_amount = $refund_amount ? (float)$refund_amount : 'NULL';
+        $refund_amount = ($refund_amount !== null && $refund_amount !== '') ? (float)$refund_amount : 0;
         $resolved_by = (int)$resolved_by;
         
         $sql = "UPDATE disputes 
@@ -176,5 +176,40 @@ class Dispute extends db_connection
         
         return $this->db_fetch_all($sql);
     }
+    
+    /**
+     * Delete/dismiss a dispute (admin only)
+     */
+    public function delete_dispute($dispute_id)
+    {
+        $dispute_id = (int)$dispute_id;
+        
+        $sql = "DELETE FROM disputes WHERE dispute_id = $dispute_id";
+        
+        return $this->db_query($sql);
+    }
 }
 ?>
+
+    /**
+     * Delete/Cancel a dispute (only if not resolved)
+     */
+    public function delete_dispute($dispute_id)
+    {
+        $dispute_id = (int)$dispute_id;
+        
+        // Check if dispute is still open
+        $dispute = $this->get_dispute_by_id($dispute_id);
+        if (!$dispute) {
+            return false;
+        }
+        
+        if ($dispute['dispute_status'] === 'resolved') {
+            return false; // Cannot delete resolved disputes
+        }
+        
+        $sql = "DELETE FROM disputes WHERE dispute_id = $dispute_id";
+        
+        return $this->db_query($sql);
+    }
+}

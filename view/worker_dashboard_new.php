@@ -160,6 +160,8 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
             margin-bottom: 20px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.1);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 100;
         }
         
         .header-top {
@@ -209,7 +211,7 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
             min-width: 200px;
             display: none;
-            z-index: 1000;
+            z-index: 10000;
             overflow: hidden;
         }
         
@@ -392,6 +394,8 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
             border-radius: 16px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
         
         @media (max-width: 768px) {
@@ -441,6 +445,7 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
             border-radius: 8px 8px 0 0;
             transition: all 0.3s ease;
             cursor: pointer;
+            min-height: 10px;
         }
         
         .bar:hover {
@@ -450,6 +455,14 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
         .bar.active {
             background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
             box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+        
+        .bar.has-data {
+            background: rgba(255, 215, 0, 0.4);
+        }
+        
+        .bar.has-data.active {
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
         }
         
         .day-label {
@@ -1211,9 +1224,12 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
             $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
             $today_index = (date('N') - 1); // 0 = Monday, 6 = Sunday
             for ($i = 0; $i < 7; $i++): 
+                $has_data = $daily_earnings[$i] > 0;
                 $height = $max_daily > 0 ? ($daily_earnings[$i] / $max_daily) * 100 : 20;
                 $is_today = ($i == $today_index);
-                $bar_class = $is_today ? 'bar active' : 'bar';
+                $bar_class = 'bar';
+                if ($has_data) $bar_class .= ' has-data';
+                if ($is_today) $bar_class .= ' active';
             ?>
             <div class="chart-bar">
                 <div class="<?php echo $bar_class; ?>" style="height: <?php echo max($height, 10); ?>%;" title="GH₵<?php echo number_format($daily_earnings[$i], 2); ?>"></div>

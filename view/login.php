@@ -301,10 +301,6 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     </style>
 </head>
 <body>
-    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle theme" style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; z-index: 10;">
-        <span id="themeIcon">☀️</span>
-    </button>
-    
     <div class="container">
         <div class="logo">
             <h1>WorkNPay</h1>
@@ -392,19 +388,3 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     </div>
 </body>
 </html>
-
-<script src="../js/theme-toggle.js"></script>
-<script>
-// Default to light mode for login page
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('worknpay_theme');
-    const themeIcon = document.getElementById('themeIcon');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        if (themeIcon) themeIcon.textContent = '☀️';
-    } else {
-        if (themeIcon) themeIcon.textContent = '🌙';
-    }
-});
-</script>

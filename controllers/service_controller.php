@@ -99,7 +99,6 @@ function get_service_categories_ctr()
     $service = new Service();
     return $service->get_categories_with_counts();
 }
-?>
 
 /**
  * Get all service categories
@@ -109,3 +108,4 @@ function get_all_categories_ctr()
     $service = new Service();
     return $service->get_all_categories();
 }
+?>

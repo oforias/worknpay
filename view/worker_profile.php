@@ -419,7 +419,5 @@ $reviews = $db->db_fetch_all($reviews_query);
             <a href="booking.php?worker_id=<?php echo $worker_id; ?>" class="btn-book">Book Now</a>
         </div>
     </div>
-    
-    <script src="../js/theme-toggle.js"></script>
 </body>
 </html>

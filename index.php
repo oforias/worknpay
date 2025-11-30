@@ -27,15 +27,10 @@ if (isset($_SESSION['user_id'])) {
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #F5F7FA;
-            color: #1a1f36;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        body.dark-mode {
             background: #0A0E1A;
             color: rgba(255, 255, 255, 0.95);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
         }
         
         /* Navigation */
@@ -45,14 +40,10 @@ if (isset($_SESSION['user_id'])) {
             left: 0;
             right: 0;
             z-index: 1000;
-            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+            background: rgba(10, 14, 26, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
-        
-        body.dark-mode nav {
-            background: rgba(10, 14, 26, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
         
         .nav-container {
@@ -78,24 +69,7 @@ if (isset($_SESSION['user_id'])) {
             align-items: center;
         }
         
-        .theme-toggle-index {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 20px;
-        }
-        
-        .theme-toggle-index:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
+
         
         .nav-links a {
             color: rgba(255, 255, 255, 0.9);
@@ -270,14 +244,9 @@ if (isset($_SESSION['user_id'])) {
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 60px;
-            color: #1a1f36;
-        }
-        
-        body.dark-mode .section-title {
-            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: transparent;
         }
         
         .features-grid {
@@ -287,21 +256,15 @@ if (isset($_SESSION['user_id'])) {
         }
         
         .feature-card {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
-            border: 1px solid #E5E7EB;
+            border: 1px solid rgba(255, 215, 0, 0.1);
             border-radius: 24px;
             padding: 40px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-        
-        body.dark-mode .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
         
         .feature-card::before {
@@ -326,12 +289,8 @@ if (isset($_SESSION['user_id'])) {
         .feature-card:hover {
             border-color: rgba(255, 215, 0, 0.3);
             transform: translateY(-12px);
-            box-shadow: 0 12px 32px rgba(255, 215, 0, 0.2);
-        }
-        
-        body.dark-mode .feature-card:hover {
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
             background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
         
         .feature-card:hover::before {
@@ -362,56 +321,34 @@ if (isset($_SESSION['user_id'])) {
         .feature-card h3 {
             font-size: 24px;
             margin-bottom: 12px;
-            color: #1a1f36;
-        }
-        
-        .feature-card p {
-            color: #6B7280;
-            line-height: 1.6;
-        }
-        
-        body.dark-mode .feature-card h3 {
             color: rgba(255, 255, 255, 0.95);
         }
         
-        body.dark-mode .feature-card p {
+        .feature-card p {
             color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
         }
         
         /* CTA Section */
         .cta {
             padding: 120px 40px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(168, 139, 250, 0.05) 100%);
-            border-top: 1px solid rgba(124, 58, 237, 0.2);
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
-        
-        body.dark-mode .cta {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 165, 0, 0.05) 100%);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
         }
         
         .cta h2 {
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 24px;
-            color: #1a1f36;
-        }
-        
-        body.dark-mode .cta h2 {
             color: rgba(255, 255, 255, 0.95);
         }
         
         .cta p {
             font-size: 20px;
-            color: #6B7280;
-            margin-bottom: 40px;
-        }
-        
-        body.dark-mode .cta p {
             color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
         }
         
         /* Footer */
@@ -496,9 +433,6 @@ if (isset($_SESSION['user_id'])) {
                 <a href="#features">Features</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#about">About</a>
-                <button class="theme-toggle-index" onclick="toggleTheme()" title="Toggle theme">
-                    <span id="themeIcon">☀️</span>
-                </button>
                 <a href="view/login.php" class="btn-login">Login</a>
                 <a href="view/register.php" class="btn-primary">Get Started</a>
             </div>
@@ -628,36 +562,3 @@ if (isset($_SESSION['user_id'])) {
     </footer>
 </body>
 </html>
-
-<script>
-// Theme Toggle for Index Page
-function toggleTheme() {
-    const body = document.body;
-    const themeIcon = document.getElementById('themeIcon');
-    
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-        themeIcon.textContent = '☀️';
-        localStorage.setItem('worknpay_theme', 'dark');
-    } else {
-        themeIcon.textContent = '🌙';
-        localStorage.setItem('worknpay_theme', 'light');
-    }
-}
-
-// Load saved theme preference - default to light for index
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('worknpay_theme');
-    const themeIcon = document.getElementById('themeIcon');
-    
-    // Default to light mode for landing page
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        if (themeIcon) themeIcon.textContent = '☀️';
-    } else {
-        document.body.classList.remove('dark-mode');
-        if (themeIcon) themeIcon.textContent = '🌙';
-    }
-});
-</script>

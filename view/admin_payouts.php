@@ -457,10 +457,6 @@ $pending_payouts = get_pending_payouts_ctr();
         <div class="header-top">
             <a href="admin_dashboard.php" class="back-link">← Back to Dashboard</a>
             <div class="header-actions">
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <span id="themeIcon">🌙</span>
-                    <span id="themeText">Dark Mode</span>
-                </button>
                 <button class="logout-btn" onclick="logout()">
                     <span>🚪</span>
                     <span>Logout</span>

@@ -96,7 +96,7 @@ try {
         $booking_data['estimated_price'],
         'paystack',
         $reference,
-        'completed',
+        'successful',
         $customer_commission,
         $worker_commission,
         $worker_payout

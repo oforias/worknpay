@@ -72,28 +72,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
             overflow-y: auto;
         }
         
-        .theme-toggle-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 20px;
-            z-index: 10;
-        }
-        
-        .theme-toggle-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
+
         
         .logo {
             text-align: center;
@@ -364,10 +343,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     </style>
 </head>
 <body>
-    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle theme">
-        <span id="themeIcon">☀️</span>
-    </button>
-    
     <div class="container">
         <div class="logo">
             <h1>WorkNPay</h1>
@@ -514,19 +489,3 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     </script>
 </body>
 </html>
-
-<script src="../js/theme-toggle.js"></script>
-<script>
-// Default to light mode for register page
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('worknpay_theme');
-    const themeIcon = document.getElementById('themeIcon');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        if (themeIcon) themeIcon.textContent = '☀️';
-    } else {
-        if (themeIcon) themeIcon.textContent = '🌙';
-    }
-});
-</script>
