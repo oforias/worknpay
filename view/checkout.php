@@ -2,13 +2,18 @@
 require_once '../settings/core.php';
 require_login('../login/login.php');
 
-// Check if cart is not empty
+// Note: This is a service marketplace, not an e-commerce cart system
+// Checkout page should redirect to booking page for service bookings
+// This file exists for legacy compatibility
+
 require_once '../controllers/cart_controller.php';
 $customer_id = get_user_id();
 $cart_items = get_user_cart_ctr($customer_id);
 
+// Since this is a booking system, redirect to home if no cart items
+// Users should book services through the booking flow, not checkout
 if (!$cart_items || count($cart_items) == 0) {
-    header('Location: cart.php');
+    header('Location: home.php');
     exit();
 }
 ?>

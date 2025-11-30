@@ -136,12 +136,18 @@ try {
     $customer_name = get_user_name();
     
     // Get fresh cart items if not provided
-    if (!$cart_items || count($cart_items) == 0) {
+    // Note: This is a booking system, not a cart system
+    // Cart items are optional and may be empty for booking payments
+    if (!$cart_items) {
+        require_once '../controllers/cart_controller.php';
         $cart_items = get_user_cart_ctr($customer_id);
     }
     
-    if (!$cart_items || count($cart_items) == 0) {
-        throw new Exception("Cart is empty");
+    // For booking payments, cart may be empty - check for booking data instead
+    if ((!$cart_items || count($cart_items) == 0) && !isset($_SESSION['pending_booking'])) {
+        // If no cart and no booking, this might be a direct payment verification
+        // Allow it to proceed but log a warning
+        error_log("Warning: Payment verification without cart items or booking data for reference: $reference");
     }
     
     // Create database connection for transaction
