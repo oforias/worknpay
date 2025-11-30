@@ -74,3 +74,6 @@ error_log
 
 # Spec files
 .kiro/
+
+# Archive folder (development files)
+archive/
