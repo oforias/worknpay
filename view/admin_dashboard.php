@@ -84,6 +84,9 @@ if (!$recent_bookings) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - WorkNPay</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <style>
         :root {
             /* Light Mode Colors */
@@ -506,12 +509,6 @@ if (!$recent_bookings) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="admin_financials.php" class="nav-link">
-                        <span class="nav-icon">💵</span>
-                        <span>Financials</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="admin_reports.php" class="nav-link">
                         <span class="nav-icon">📈</span>
                         <span>Reports</span>
@@ -573,18 +570,20 @@ if (!$recent_bookings) {
                     </div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div>
-                            <div class="stat-value">GH₵<?php echo number_format($stats['total_revenue'], 2); ?></div>
-                            <div class="stat-label">Platform Revenue</div>
-                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
-                                12% Commission + Instant Payout Fees (2%)
+                <a href="admin_financials.php" style="text-decoration: none; color: inherit;">
+                    <div class="stat-card" style="cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value">GH₵<?php echo number_format($stats['total_revenue'], 2); ?></div>
+                                <div class="stat-label">Platform Revenue</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+                                    12% Commission + Instant Payout Fees (2%)
+                                </div>
                             </div>
+                            <div class="stat-icon revenue">💰</div>
                         </div>
-                        <div class="stat-icon revenue">💰</div>
                     </div>
-                </div>
+                </a>
             </div>
             
             <!-- Quick Actions -->

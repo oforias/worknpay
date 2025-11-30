@@ -99,6 +99,9 @@ if (!$monthly_revenue) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Dashboard - WorkNPay Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <style>
         :root {
             --bg-primary: #F5F7FA;

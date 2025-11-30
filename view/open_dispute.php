@@ -45,6 +45,9 @@ $hours_remaining = max(0, 48 - $hours_since);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Dispute - WorkNPay</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {

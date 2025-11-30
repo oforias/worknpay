@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon PNG Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        button {
+            background: #FFD700;
+            color: #0A0E1A;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #FFA500;
+        }
+        .instructions {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #FFD700;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WorkNPay Favicon PNG Generator</h1>
+        <div class="instructions">
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                <li>Right-click on the favicon below</li>
+                <li>Select "Save image as..." or "Copy image"</li>
+                <li>Save it as <code>favicon.png</code> in your project root</li>
+            </ol>
+        </div>
+        
+        <canvas id="faviconCanvas" width="64" height="64"></canvas>
+        
+        <div>
+            <button onclick="downloadFavicon()">Download favicon.png</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('faviconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw background
+        ctx.fillStyle = '#0A0E1A';
+        ctx.fillRect(0, 0, 64, 64);
+        
+        // Create gradient
+        const gradient = ctx.createLinearGradient(0, 0, 64, 64);
+        gradient.addColorStop(0, '#FFD700');
+        gradient.addColorStop(1, '#FFA500');
+        
+        // Draw W letter
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(16, 20);
+        ctx.lineTo(20, 20);
+        ctx.lineTo(24, 44);
+        ctx.lineTo(28, 28);
+        ctx.lineTo(32, 44);
+        ctx.lineTo(36, 20);
+        ctx.lineTo(40, 20);
+        ctx.lineTo(34, 48);
+        ctx.lineTo(30, 36);
+        ctx.lineTo(26, 48);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        
+        // Draw gear icon
+        ctx.strokeStyle = gradient;
+        ctx.fillStyle = gradient;
+        ctx.lineWidth = 1.5;
+        
+        // Gear circle
+        ctx.beginPath();
+        ctx.arc(48, 16, 6, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // Center dot
+        ctx.beginPath();
+        ctx.arc(48, 16, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Gear teeth
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(48, 10);
+        ctx.lineTo(48, 7);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(48, 22);
+        ctx.lineTo(48, 25);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(42, 16);
+        ctx.lineTo(39, 16);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(54, 16);
+        ctx.lineTo(57, 16);
+        ctx.stroke();
+        
+        function downloadFavicon() {
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
+

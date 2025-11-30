@@ -19,6 +19,9 @@ $pending_payouts = get_pending_payouts_ctr();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payout Management - WorkNPay Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <style>
         :root {
             /* Light Mode Colors */

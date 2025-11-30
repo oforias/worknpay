@@ -111,6 +111,9 @@ if ($max_daily == 0) $max_daily = 1; // Avoid division by zero
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worker Dashboard - WorkNPay</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {

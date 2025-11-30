@@ -11,14 +11,22 @@ if (!is_admin()) {
 $db = new db_connection();
 
 // Get statistics - Platform revenue (12% commission + instant payout fees)
-$revenue_result = $db->db_fetch_one("SELECT 
-                    SUM(customer_commission + worker_commission) as commission_revenue,
-                    SUM(CASE WHEN payout_type = 'instant' THEN payout_amount * 0.02 ELSE 0 END) as payout_fees
-                  FROM payments p
-                  LEFT JOIN payouts py ON p.booking_id = py.booking_id
-                  WHERE p.payment_status = 'completed'");
-$commission_revenue = ($revenue_result && $revenue_result['commission_revenue']) ? $revenue_result['commission_revenue'] : 0;
-$payout_fees = ($revenue_result && $revenue_result['payout_fees']) ? $revenue_result['payout_fees'] : 0;
+// Calculate from payments table: customer_commission (7%) + worker_commission (5%)
+$revenue_query = "SELECT 
+                    COALESCE(SUM(customer_commission + worker_commission), 0) as commission_revenue
+                  FROM payments
+                  WHERE payment_status = 'successful'";
+$result = $db->db_fetch_one($revenue_query);
+$commission_revenue = ($result && $result['commission_revenue']) ? floatval($result['commission_revenue']) : 0;
+
+// Calculate instant payout fees (2% of instant payouts)
+$payout_fees_query = "SELECT 
+                        COALESCE(SUM(payout_fee), 0) as payout_fees
+                      FROM payouts
+                      WHERE payout_type = 'instant' AND payout_status IN ('completed', 'pending')";
+$result = $db->db_fetch_one($payout_fees_query);
+$payout_fees = ($result && $result['payout_fees']) ? floatval($result['payout_fees']) : 0;
+
 $total_revenue = $commission_revenue + $payout_fees;
 $total_bookings = $db->db_fetch_one("SELECT COUNT(*) as count FROM bookings")['count'];
 $total_users = $db->db_fetch_one("SELECT COUNT(*) as count FROM users")['count'];
@@ -32,6 +40,9 @@ $open_disputes = $db->db_fetch_one("SELECT COUNT(*) as count FROM disputes WHERE
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports - Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
     <link rel="stylesheet" href="../css/theme-variables.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
