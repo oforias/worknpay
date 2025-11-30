@@ -1,0 +1,47 @@
+# Sensitive files
+settings/db_cred.php
+settings/paystack_config.php
+
+# Test files
+test_*.php
+check_*.php
+create_test_*.php
+debug_*.php
+setup_test_*.php
+show_test_*.php
+verify_setup.php
+release_escrow_manual.php
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Spec files (optional - remove if you want to include them)
+.kiro/
+
+# Documentation (keep these)
+!README.md
+!LICENSE
+!DEPLOYMENT_READY.md
+!FREE_HOSTING_GUIDE.md

@@ -1,0 +1,13 @@
+To remove theme toggle from all pages, remove these elements:
+
+1. Remove theme toggle buttons from HTML
+2. Remove theme-toggle.js script includes
+3. Remove toggleTheme() function calls
+
+Key files to update:
+- view/home.php - Remove theme toggle button from header
+- view/login.php - Remove theme toggle button
+- view/register.php - Remove theme toggle button
+- All other view/*.php files - Remove <script src="../js/theme-toggle.js"></script>
+
+The app will default to the current theme (dark mode for most pages).

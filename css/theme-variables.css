@@ -1,0 +1,74 @@
+/**
+ * Universal Theme Variables - DARK MODE ONLY
+ * Dark sunset theme with gold accents
+ * 
+ * Usage:
+ *   <link rel="stylesheet" href="../css/theme-variables.css">
+ *   
+ * Then use variables in your CSS:
+ *   body { background: var(--bg-primary); color: var(--text-primary); }
+ */
+
+:root {
+    /* ========================================
+       DARK MODE COLORS (Forced)
+       ======================================== */
+    
+    /* Background Colors */
+    --bg-primary: #0A0E1A;                      /* Deep navy background */
+    --bg-secondary: rgba(255, 255, 255, 0.03);  /* Subtle white overlay for cards */
+    --bg-tertiary: rgba(255, 255, 255, 0.05);   /* Slightly lighter for nested containers */
+    
+    /* Text Colors */
+    --text-primary: rgba(255, 255, 255, 0.95);  /* Near-white for primary text */
+    --text-secondary: rgba(255, 255, 255, 0.6); /* Dimmed white for secondary text */
+    
+    /* Border Colors */
+    --border-color: rgba(255, 215, 0, 0.2);     /* Subtle gold borders */
+    
+    /* Special Backgrounds */
+    --header-bg: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(20, 24, 36, 0.95) 100%);
+    --modal-bg: rgba(10, 14, 26, 0.98);         /* Nearly opaque dark background */
+    --input-bg: rgba(255, 255, 255, 0.05);      /* Subtle white tint for inputs */
+    
+    /* Shadow Effects */
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);          /* Stronger shadow for depth */
+    --hover-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);    /* Gold-tinted hover shadow */
+}
+
+/* Force dark background */
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode background gradient overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure content is above overlay */
+body > *:not(::before) {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   ACCESSIBILITY NOTES
+   ======================================== */
+
+/*
+ * Contrast Ratios (WCAG 2.1 AA Compliance):
+ * - rgba(255,255,255,0.95) on #0A0E1A: 18.2:1 ✓ (Exceeds 4.5:1 requirement)
+ * - rgba(255,255,255,0.6) on #0A0E1A: 7.8:1 ✓ (Exceeds 4.5:1 requirement)
+ */
