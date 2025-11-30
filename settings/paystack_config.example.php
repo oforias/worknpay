@@ -19,6 +19,18 @@ define('PAYSTACK_PUBLIC_KEY', 'pk_test_your_test_public_key_here');
 // Paystack API Base URL
 define('PAYSTACK_API_URL', 'https://api.paystack.co');
 
+// Application Base URL (for callbacks)
+// For local development:
+// define('APP_BASE_URL', 'http://localhost');
+// For InfinityFree hosting (replace with your domain):
+// define('APP_BASE_URL', 'https://yourdomain.epizy.com');
+// Auto-detect from server (recommended for production):
+if (!defined('APP_BASE_URL')) {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    define('APP_BASE_URL', $protocol . $host);
+}
+
 /**
  * Test Cards for Development:
  * 
