@@ -2,6 +2,12 @@
 
 A mobile-first e-commerce platform connecting customers with verified skilled and semi-skilled workers in Ghana's informal sector, featuring integrated Paystack payment processing and escrow functionality.
 
+## 🌐 Live Demo
+
+**Live Server**: [http://worknpay.infinityfreeapp.com/](http://worknpay.infinityfreeapp.com/)
+
+Try out the platform with full functionality including booking, payments, and worker management!
+
 ## 🚀 Features
 
 ### For Customers
